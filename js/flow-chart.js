@@ -1,94 +1,110 @@
 FlowChart = (function() {
   
   function start(jsonFile) {
-    startCytoscape()
-    parseFile(jsonFile, addElements)
+    parseFile(jsonFile, startCytoscape)
   }
   
   function parseFile(file, callback) {
     reader = new FileReader()
     reader.onload = function(e) {
-      FlowChart.metadata = JSON.parse(e.target.result)
-      callback()
+      callback && callback(JSON.parse(e.target.result))
     }
     reader.readAsText(file)
   }
-  
-  function startCytoscape() {
+
+  function processData(rawData) {
+    
+    var operations = rawData.operations
+    var sourcesNode = { data: {
+      id: 'sources'
+    }}
+    var nodes = operations.map(function(op){
+      return { data: {
+        id: op.name,
+        count: op.populationCount || op.outputCount
+      }}
+    }).concat([sourcesNode])
+
+    var edges = []
+    for (var i = 0; i < operations.length; i++) {
+      var op = operations[i]
+      op.inputs.forEach(function(input){
+        edges.push({
+          data: {
+            source: input,
+            target: op.name
+          }
+        })
+      })
+    }
+
+    return {
+      nodes: nodes,
+      edges: edges
+    }
+  }
+  function nFormatter(num, digits) {
+    var si = [
+      { value: 1, symbol: "" },
+      { value: 1E3, symbol: "k" },
+      { value: 1E6, symbol: "M" },
+      { value: 1E9, symbol: "G" },
+      { value: 1E12, symbol: "T" },
+      { value: 1E15, symbol: "P" },
+      { value: 1E18, symbol: "E" }
+    ];
+    var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+    var i;
+    for (i = si.length - 1; i > 0; i--) {
+      if (num >= si[i].value) {
+        break;
+      }
+    }
+    return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
+  }
+  function startCytoscape(rawData) {
+    var elements = processData(rawData)
     window.cy = cytoscape({
       container: document.getElementById('cy'),
-      
       boxSelectionEnabled: false,
       autounselectify: true,
-      
       layout: {
-        name: 'dagre'
+        name: 'dagre',
+        rankDir: 'lr',
+        ranker: 'longest-path'
       },
-      
       style: [
         {
           selector: 'node',
           style: {
-            'content': 'data(id)',
+            'content': function(el) {
+              return el.data('id') + '\n' + (el.data('count') ? nFormatter(el.data('count'), 2):  '-')
+            },
+            'shape': 'rectangle',
+            'width': 250,
+            'height': '3em',
             'text-opacity': 0.5,
             'text-valign': 'center',
-            'text-halign': 'right',
-            'background-color': '#11479e'
+            'text-halign': 'center',
+            'font-weight': 'bold',
+            'background-color': '#555',
+            'color': 'white',
+            'text-wrap': 'wrap'
           }
         },
-        
         {
           selector: 'edge',
           style: {
             'curve-style': 'bezier',
             'width': 4,
             'target-arrow-shape': 'triangle',
-            'line-color': '#9dbaea',
-            'target-arrow-color': '#9dbaea'
+            'line-color': '#bbb',
+            'target-arrow-color': '#bbb'
           }
         }
       ],
-      
-      elements: {
-        nodes: [
-          { data: { id: 'n0' } },
-          { data: { id: 'n1' } },
-          { data: { id: 'n2' } },
-          { data: { id: 'n3' } },
-          { data: { id: 'n4' } },
-          { data: { id: 'n5' } },
-          { data: { id: 'n6' } },
-          { data: { id: 'n7' } },
-          { data: { id: 'n8' } },
-          { data: { id: 'n9' } },
-          { data: { id: 'n10' } },
-          { data: { id: 'n11' } },
-          { data: { id: 'n12' } },
-          { data: { id: 'n13' } },
-          { data: { id: 'n14' } },
-          { data: { id: 'n15' } },
-          { data: { id: 'n16' } }
-        ],
-        edges: [
-          { data: { source: 'n0', target: 'n1' } },
-          { data: { source: 'n1', target: 'n2' } },
-          { data: { source: 'n1', target: 'n3' } },
-          { data: { source: 'n4', target: 'n5' } },
-          { data: { source: 'n4', target: 'n6' } },
-          { data: { source: 'n6', target: 'n7' } },
-          { data: { source: 'n6', target: 'n8' } },
-          { data: { source: 'n8', target: 'n9' } },
-          { data: { source: 'n8', target: 'n10' } },
-          { data: { source: 'n11', target: 'n12' } },
-          { data: { source: 'n12', target: 'n13' } },
-          { data: { source: 'n13', target: 'n14' } },
-          { data: { source: 'n13', target: 'n15' } },
-        ]
-      }
+      elements: elements
     })
-  }
-  
-  function addElements() {
   }
   
   return {

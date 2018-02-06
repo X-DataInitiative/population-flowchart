@@ -1,5 +1,6 @@
 #cy {
-  min-height: 100px
+  height: 80vh;
+  display: block;
 }
 
 .upload {

@@ -43,7 +43,6 @@
       file.onchange = function() {
         if(file.files.length > 0) {
           document.getElementById('filename').innerHTML = file.files[0].name;
-          console.log(FlowChart)
           FlowChart.start(file.files[0])
         }
       };

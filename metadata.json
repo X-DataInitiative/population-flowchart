@@ -10,7 +10,7 @@
     "outputCount" : 5053981
   }, {
     "name" : "drug_purchases",
-    "inputs" : [ "dcir" ],
+    "inputs" : [ "sources" ],
     "outputType" : "events",
     "outputPath" : "/shared/Observapur/testing/featuring/drug_purchases/data",
     "outputCount" : 9777091,
@@ -18,7 +18,7 @@
     "populationCount" : 2546658
   }, {
     "name" : "filter_patients",
-    "inputs" : [ "drug_purchases" ],
+    "inputs" : [ "extract_patients", "drug_purchases" ],
     "outputType" : "patients",
     "outputPath" : "/shared/Observapur/testing/featuring/filter_patients/data",
     "outputCount" : 2266782
