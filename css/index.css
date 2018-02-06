@@ -1,0 +1,10 @@
+#cy {
+  min-height: 100px
+}
+
+.upload {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 80%;
+}

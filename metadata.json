@@ -1,0 +1,90 @@
+{
+  "className" : "fr.polytechnique.cmap.cnam.study.fall.FallMain$",
+  "startTimestamp" : "2018-02-06T11:00:19Z",
+  "endTimestamp" : "2018-02-06T11:48:40Z",
+  "operations" : [ {
+    "name" : "extract_patients",
+    "inputs" : [ "sources" ],
+    "outputType" : "patients",
+    "outputPath" : "/shared/Observapur/testing/featuring/extract_patients/data",
+    "outputCount" : 5053981
+  }, {
+    "name" : "drug_purchases",
+    "inputs" : [ "dcir" ],
+    "outputType" : "events",
+    "outputPath" : "/shared/Observapur/testing/featuring/drug_purchases/data",
+    "outputCount" : 9777091,
+    "populationPath" : "/shared/Observapur/testing/featuring/drug_purchases/patients",
+    "populationCount" : 2546658
+  }, {
+    "name" : "filter_patients",
+    "inputs" : [ "drug_purchases" ],
+    "outputType" : "patients",
+    "outputPath" : "/shared/Observapur/testing/featuring/filter_patients/data",
+    "outputCount" : 2266782
+  }, {
+    "name" : "exposures",
+    "inputs" : [ "drug_purchases" ],
+    "outputType" : "events",
+    "outputPath" : "/shared/Observapur/testing/featuring/exposures/data",
+    "outputCount" : 133477,
+    "populationPath" : "/shared/Observapur/testing/featuring/exposures/patients",
+    "populationCount" : 119323
+  }, {
+    "name" : "diagnoses",
+    "inputs" : [ "sources" ],
+    "outputType" : "events",
+    "outputPath" : "/shared/Observapur/testing/featuring/diagnoses/data",
+    "outputCount" : 162702,
+    "populationPath" : "/shared/Observapur/testing/featuring/diagnoses/patients",
+    "populationCount" : 119372
+  }, {
+    "name" : "acts",
+    "inputs" : [ "sources" ],
+    "outputType" : "events",
+    "outputPath" : "/shared/Observapur/testing/featuring/acts/data",
+    "outputCount" : 2729,
+    "populationPath" : "/shared/Observapur/testing/featuring/acts/patients",
+    "populationCount" : 2698
+  }, {
+    "name" : "liberal_acts",
+    "inputs" : [ "acts" ],
+    "outputType" : "events",
+    "outputPath" : "/shared/Observapur/testing/featuring/liberal_acts/data",
+    "outputCount" : 376,
+    "populationPath" : "/shared/Observapur/testing/featuring/liberal_acts/patients",
+    "populationCount" : 374
+  }, {
+    "name" : "hospitalized_fractures",
+    "inputs" : [ "diagnoses", "acts" ],
+    "outputType" : "events",
+    "outputPath" : "/shared/Observapur/testing/featuring/hospitalized_fractures/data",
+    "outputCount" : 124677,
+    "populationPath" : "/shared/Observapur/testing/featuring/hospitalized_fractures/patients",
+    "populationCount" : 94997
+  }, {
+    "name" : "liberal_fractures",
+    "inputs" : [ "liberal_acts" ],
+    "outputType" : "events",
+    "outputPath" : "/shared/Observapur/testing/featuring/fractures/liberal_fractures/data",
+    "outputCount" : 376,
+    "populationPath" : "/shared/Observapur/testing/featuring/fractures/liberal_fractures/patients",
+    "populationCount" : 374
+  }, {
+    "name" : "public_ambulatory_fractures",
+    "inputs" : [ "acts" ],
+    "outputType" : "events",
+    "outputPath" : "/shared/Observapur/testing/featuring/fractures/public_ambulatory_fractures/data",
+    "outputCount" : 1192,
+    "populationPath" : "/shared/Observapur/testing/featuring/fractures/public_ambulatory_fractures/patients",
+    "populationCount" : 1184
+  }, {
+    "name" : "private_ambulatory_fractures",
+    "inputs" : [ "acts" ],
+    "outputType" : "events",
+    "outputPath" : "/shared/Observapur/testing/featuring/fractures/private_ambulatory_fractures/data",
+    "outputCount" : 594,
+    "populationPath" : "/shared/Observapur/testing/featuring/fractures/private_ambulatory_fractures/patients",
+    "populationCount" : 593
+  } ]
+}

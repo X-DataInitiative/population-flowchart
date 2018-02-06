@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf8">
+  <title>Population Flowchart</title>
+  <link rel="stylesheet" href="css/bulma.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/fa-svg-with-js.css">
+</head>
+<body>
+  <div class="section">
+    <div class="container">
+      <div class="upload">
+        <div class="file has-name">
+          <label class="file-label">
+            <input id="file" class="file-input" type="file" name="metadata">
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fas fa-upload"></i> 
+              </span>
+              <span class="file-label">
+                Choose a file…
+              </span>
+            </span>
+            <span id="filename" class="file-name">
+              No file has been choosen
+            </span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div id="cy" class="box">
+    </div>
+    <script src="js/font-awesome/fontawesome-all.min.js"></script>
+    <script src="js/cytoscape/cytoscape.min.js"></script>
+    <script src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
+    <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.5.0/cytoscape-dagre.js"></script>
+    <script src="js/flow-chart.js"></script>
+    <script>
+      var file = document.getElementById("file");
+      file.onchange = function() {
+        if(file.files.length > 0) {
+          document.getElementById('filename').innerHTML = file.files[0].name;
+          console.log(FlowChart)
+          FlowChart.start(file.files[0])
+        }
+      };
+    </script>
+  </body>
+  </html>
