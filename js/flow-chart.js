@@ -21,14 +21,15 @@ FlowChart = (function() {
     var nodes = operations.map(function(op){
       return { data: {
         id: op.name,
-        count: op.populationCount || op.outputCount
+        count_left: op.patients_before,
+        count_right: op.patients_after
       }}
     }).concat([sourcesNode])
 
     var edges = []
     for (var i = 0; i < operations.length; i++) {
       var op = operations[i]
-      op.inputs.forEach(function(input){
+      op.parents.forEach(function(input){
         edges.push({
           data: {
             source: input,
@@ -43,27 +44,21 @@ FlowChart = (function() {
       edges: edges
     }
   }
-  function nFormatter(num, digits) {
-    var si = [
-      { value: 1, symbol: "" },
-      { value: 1E3, symbol: "k" },
-      { value: 1E6, symbol: "M" },
-      { value: 1E9, symbol: "G" },
-      { value: 1E12, symbol: "T" },
-      { value: 1E15, symbol: "P" },
-      { value: 1E18, symbol: "E" }
-    ];
-    var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
-    var i;
-    for (i = si.length - 1; i > 0; i--) {
-      if (num >= si[i].value) {
-        break;
-      }
-    }
-    return (num / si[i].value).toFixed(digits).replace(rx, "$1") + si[i].symbol;
-  }
+
   function startCytoscape(rawData) {
+    
+    var nodeLabel = function(sep) { return function(el) {
+      var fmt = Util.nFormatter(2)
+      var count_left = el.data('count_left')
+      var count_right = el.data('count_right')
+      var diff = count_left - count_right
+      return el.data('id').toUpperCase() + 
+        '\n' + fmt(count_left) + sep + fmt(count_right) +
+        '\n' + 'diff: ' + fmt(diff)
+    }}
+
     var elements = processData(rawData)
+
     window.cy = cytoscape({
       container: document.getElementById('cy'),
       boxSelectionEnabled: false,
@@ -77,12 +72,10 @@ FlowChart = (function() {
         {
           selector: 'node',
           style: {
-            'content': function(el) {
-              return el.data('id') + '\n' + (el.data('count') ? nFormatter(el.data('count'), 2):  '-')
-            },
+            'content': nodeLabel(' ~> '),
             'shape': 'rectangle',
             'width': 250,
-            'height': '3em',
+            'height': '5em',
             'text-opacity': 0.5,
             'text-valign': 'center',
             'text-halign': 'center',

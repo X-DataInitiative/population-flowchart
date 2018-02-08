@@ -1,0 +1,41 @@
+{
+  "operations": 
+  [
+    {
+      "name": "sources", 
+      "parents": [], 
+      "patients_before": 5123321, 
+      "patients_after": 5123321
+    },
+    {
+      "name": "diagnoses", 
+      "parents": ["sources"], 
+      "patients_before": 5123321, 
+      "patients_after": 123321
+    },
+    {
+      "name": "acts", 
+      "parents": ["sources"], 
+      "patients_before": 5123321, 
+      "patients_after": 432213
+    },
+    {
+      "name": "fractures", 
+      "parents": ["acts", "diagnoses"], 
+      "patients_before": 231452, 
+      "patients_after": 10215
+    },
+    {
+      "name": "drug_purchases", 
+      "parents": ["sources"], 
+      "patients_before": 5123321, 
+      "patients_after": 1102512
+    },
+    {
+      "name": "exposures", 
+      "parents": ["drug_purchases"], 
+      "patients_before": 1102512, 
+      "patients_after": 902512
+    }
+  ]
+}
