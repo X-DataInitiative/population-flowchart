@@ -16,7 +16,7 @@ FlowChart = (function() {
     
     var operations = rawData.operations
     var sourcesNode = { data: {
-      id: 'sources'
+      id: 'source',
     }}
     var nodes = operations.map(function(op){
       return { data: {
@@ -48,13 +48,15 @@ FlowChart = (function() {
   function startCytoscape(rawData) {
     
     var nodeLabel = function(sep) { return function(el) {
+      var name = el.data('id').split('_').join(' ')
       var fmt = Util.nFormatter(2)
-      var count_left = el.data('count_left')
+      var count_left = el.data('count_left') 
       var count_right = el.data('count_right')
+      console.log(el.data('count_left'))
       var diff = count_left - count_right
-      return el.data('id').toUpperCase() + 
-        '\n' + fmt(count_left) + sep + fmt(count_right) +
-        '\n' + 'diff: ' + fmt(diff)
+      return name.toUpperCase() + '\n' +
+        (count_left ? fmt(count_left) : '') + (count_right ? (sep + fmt(count_right)) : '') +
+        (diff > 0 ? ('\n' + 'diff: ' + fmt(diff)) : '')
     }}
 
     var elements = processData(rawData)
@@ -74,7 +76,7 @@ FlowChart = (function() {
           style: {
             'content': nodeLabel(' ~> '),
             'shape': 'rectangle',
-            'width': 250,
+            'width': 320,
             'height': '5em',
             'text-opacity': 0.5,
             'text-valign': 'center',
