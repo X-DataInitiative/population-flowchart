@@ -33,20 +33,17 @@
   <div class="container">
     <div id="cy" class="box">
     </div>
+    <!-- Dependencies -->
     <script src="js/font-awesome/fontawesome-all.min.js"></script>
     <script src="js/cytoscape/cytoscape.min.js"></script>
     <script src="https://cdn.rawgit.com/cpettitt/dagre/v0.7.4/dist/dagre.min.js"></script>
     <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-dagre/1.5.0/cytoscape-dagre.js"></script>
+    <!-- Import main code -->
     <script src="js/util.js"></script>
-    <script src="js/flow-chart.js"></script>
-    <script>
-      var file = document.getElementById("file");
-      file.onchange = function() {
-        if(file.files.length > 0) {
-          document.getElementById('filename').innerHTML = file.files[0].name;
-          FlowChart.start(file.files[0])
-        }
-      };
-    </script>
+    <script src="js/parser.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/app.js"></script>
+    <!-- Start app -->
+    <script>App.start()</script>
   </body>
   </html>
