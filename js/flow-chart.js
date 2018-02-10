@@ -52,7 +52,6 @@ FlowChart = (function() {
       var fmt = Util.nFormatter(2)
       var count_left = el.data('count_left') 
       var count_right = el.data('count_right')
-      console.log(el.data('count_left'))
       var diff = count_left - count_right
       return name.toUpperCase() + '\n' +
         (count_left ? fmt(count_left) : '') + (count_right ? (sep + fmt(count_right)) : '') +

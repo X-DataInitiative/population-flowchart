@@ -1,41 +1,94 @@
 {
-  "operations": 
-  [
-    {
-      "name": "sources", 
-      "parents": [], 
-      "patients_before": 5123321, 
-      "patients_after": 5123321
-    },
-    {
-      "name": "diagnoses", 
-      "parents": ["sources"], 
-      "patients_before": 5123321, 
-      "patients_after": 123321
-    },
-    {
-      "name": "acts", 
-      "parents": ["sources"], 
-      "patients_before": 5123321, 
-      "patients_after": 432213
-    },
-    {
-      "name": "fractures", 
-      "parents": ["acts", "diagnoses"], 
-      "patients_before": 231452, 
-      "patients_after": 10215
-    },
-    {
-      "name": "drug_purchases", 
-      "parents": ["sources"], 
-      "patients_before": 5123321, 
-      "patients_after": 1102512
-    },
-    {
-      "name": "exposures", 
-      "parents": ["drug_purchases"], 
-      "patients_before": 1102512, 
-      "patients_after": 902512
-    }
-  ]
+    "operations": [
+        {
+            "name": "public_ambulatory_fractures",
+            "parents": [
+                "acts"
+            ],
+            "patients_before": 2691,
+            "patients_after": 1184
+        },
+        {
+            "name": "acts",
+            "parents": [
+                "source"
+            ],
+            "patients_before": null,
+            "patients_after": 2691
+        },
+        {
+            "name": "liberal_fractures",
+            "parents": [
+                "liberal_acts"
+            ],
+            "patients_before": 373,
+            "patients_after": 373
+        },
+        {
+            "name": "exposures",
+            "parents": [
+                "drug_purchases"
+            ],
+            "patients_before": 2545231,
+            "patients_after": 118905
+        },
+        {
+            "name": "hospitalized_fractures",
+            "parents": [
+                "diagnoses",
+                "acts"
+            ],
+            "patients_before": 121142,
+            "patients_after": 94548
+        },
+        {
+            "name": "filter_patients",
+            "parents": [
+                "drug_purchases",
+                "extract_patients"
+            ],
+            "patients_before": 5060948,
+            "patients_after": 2265366
+        },
+        {
+            "name": "extract_patients",
+            "parents": [
+                "source"
+            ],
+            "patients_before": null,
+            "patients_after": 5053968
+        },
+        {
+            "name": "diagnoses",
+            "parents": [
+                "source"
+            ],
+            "patients_before": null,
+            "patients_after": 118827
+        },
+        {
+            "name": "drug_purchases",
+            "parents": [
+                "source"
+            ],
+            "patients_before": null,
+            "patients_after": 2545231
+        },
+        {
+            "name": "private_ambulatory_fractures",
+            "parents": [
+                "acts"
+            ],
+            "patients_before": 2691,
+            "patients_after": 589
+        },
+        {
+            "name": "liberal_acts",
+            "parents": [
+                "acts"
+            ],
+            "patients_before": 2691,
+            "patients_after": 373
+        }
+    ]
 }
