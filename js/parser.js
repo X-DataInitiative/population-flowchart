@@ -1,7 +1,7 @@
 Parser = (function() {
 
   function fromFile(file, callback) {
-    reader = new FileReader()
+    var reader = new FileReader()
     reader.onload = function(e) {
       var parsedData = processData(JSON.parse(e.target.result))
       callback(parsedData)
@@ -19,11 +19,13 @@ Parser = (function() {
       id: 'source',
     }}
     var nodes = operations.map(function(op){
-      return { data: {
-        id: op.name,
-        count_left: op.patients_before,
-        count_right: op.patients_after
-      }}
+      return { 
+        data: {
+          id: op.name,
+          count_left: op.patients_before,
+          count_right: op.patients_after
+        }
+      }
     }).concat([sourcesNode])
 
     var edges = []

@@ -33,7 +33,7 @@ App = (function() {
     bindEvents()
   }
 
-  return { 
+  return {
     start
   }
 })()
