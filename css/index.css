@@ -2,6 +2,10 @@ html {
   background-color: #eee;
 }
 
+textarea {
+  resize: none;
+}
+
 .section {
   height: 100vh;
 }
@@ -38,8 +42,4 @@ html {
 
 .file-name {
   background-color: white;
-}
-
-textarea {
-  resize: none;
 }
