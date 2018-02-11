@@ -1,7 +1,5 @@
 Graph = (function() {
 
-  var isDrawn = false;
-
   var cytoscapeOptions = {
     boxSelectionEnabled: false,
     autounselectify: true,
@@ -52,20 +50,13 @@ Graph = (function() {
   }}
 
 
-  function draw($el,data) {
-    cytoscapeOptions.container = $el
-    cytoscapeOptions.elements = data
+  function draw($container, elements) {
+    cytoscapeOptions.container = $container
+    cytoscapeOptions.elements = elements
     window.cy = cytoscape(cytoscapeOptions)
-    Graph.isDrawn = true;
   }
 
-  function destroy() {
-    window.cy.destroy()
-  }
-  
   return { 
-    isDrawn,
-    draw,
-    destroy
+    draw
   }
-})();
+})()
