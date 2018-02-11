@@ -3,47 +3,53 @@
 <head>
   <meta charset="utf8">
   <title>Population Flowchart</title>
-  <link rel="stylesheet" href="css/bulma.css">
+  <link rel="stylesheet" href="css/bulma.min.css">
   <link rel="stylesheet" href="css/index.css">
-  <link rel="stylesheet" href="css/fa-svg-with-js.css">
 </head>
 <body>
+  
+  <!-- Upload File -->
   <div class="section">
     <div class="container">
       <div class="upload">
         <div class="file has-name">
           <label class="file-label">
-            <input id="file" class="file-input" type="file" name="metadata">
+            <input id="file" class="file-input" type="file" name="input">
             <span class="file-cta">
               <span class="file-icon">
-                <i class="fas fa-upload"></i> 
+                <svg width="512" height="512" viewBox="0 0 512 512">
+                  <path d="M240 352h-240v128h480v-128h-240zM448 416h-64v-32h64v32zM112 160l128-128 128 128h-80v160h-96v-160z"></path>
+                </svg>
               </span>
               <span class="file-label">
                 Choose a file…
               </span>
             </span>
-            <span id="filename" class="file-name">
-              No file has been choosen
+            <span id="file-name-box" class="file-name">
+              No file has been chosen
             </span>
           </label>
         </div>
       </div>
     </div>
   </div>
+  
+  <!-- Graph -->
   <div class="container">
-    <div id="graph" class="box">
-    </div>
-    <!-- Dependencies -->
-    <script src="js/font-awesome/fontawesome-all.min.js"></script>
-    <script src="js/cytoscape/cytoscape.min.js"></script>
-    <script src="js/cytoscape/dagre.min.js"></script>
-    <script src="js/cytoscape/cytoscape-dagre.js"></script>
-    <!-- Import main code -->
-    <script src="js/util.js"></script>
-    <script src="js/parser.js"></script>
-    <script src="js/graph.js"></script>
-    <script src="js/app.js"></script>
-    <!-- Start app -->
-    <script>App.start()</script>
-  </body>
-  </html>
+    <div id="graph" class="box"></div>
+  </div>
+
+  <!-- Import Dependencies -->
+  <script src="js/include/cytoscape.min.js"></script>
+  <script src="js/include/dagre.min.js"></script>
+  <script src="js/include/cytoscape-dagre.js"></script>
+  <!-- Import Main Code -->
+  <script src="js/util.js"></script>
+  <script src="js/parser.js"></script>
+  <script src="js/graph.js"></script>
+  <script src="js/app.js"></script>
+  <!-- Start App -->
+  <script>App.start()</script>
+
+</body>
+</html>

@@ -1,13 +1,13 @@
 App = (function() {
 
   var $file = document.getElementById("file");
-  var $fileName = document.getElementById('filename')
+  var $fileNameBox = document.getElementById('file-name-box')
   var $graphContainer = document.getElementById('graph')
 
   function handleFileChange() {
     if($file.files.length > 0) {
       firstFile = $file.files[0]
-      $fileName.innerHTML = firstFile.name;
+      $fileNameBox.innerHTML = firstFile.name;
       Parser.fromFile(firstFile, function (parsedData) {
         if (Graph.isDrawn) {
           Graph.destroy()

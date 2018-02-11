@@ -3,7 +3,6 @@ Graph = (function() {
   var isDrawn = false;
 
   var cytoscapeOptions = {
-    container: document.getElementById('cy'),
     boxSelectionEnabled: false,
     autounselectify: true,
     layout: {
