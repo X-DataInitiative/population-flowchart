@@ -5,6 +5,7 @@ Graph = (function() {
     autounselectify: true,
     layout: {
       name: 'dagre',
+      padding: 48,
       rankDir: 'lr',
       ranker: 'longest-path'
     },

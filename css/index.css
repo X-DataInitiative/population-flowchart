@@ -2,19 +2,44 @@ html {
   background-color: #eee;
 }
 
+.section {
+  height: 100vh;
+}
+
+.main {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.data-input {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 #graph {
-  display: block;
-  height: 80vh;
+  flex: 1 0 auto;
   padding: 0px;
 }
 
-.upload {
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  width: 80%;
+.upload-area {
+  flex: 0 0 350px;
+}
+
+.gap {
+  flex: 0 0 36px;
+}
+
+.paste-area {
+  flex: 1 0 auto;
 }
 
 .file-name {
   background-color: white;
+}
+
+textarea {
+  resize: none;
 }

@@ -9,6 +9,10 @@ Parser = (function() {
     reader.readAsText(file)
   }
 
+  function fromText(text) {
+    return processData(JSON.parse(text))
+  }
+
   function processData(rawData) {
     var operations = rawData.operations
     var sourcesNode = { data: {
@@ -42,6 +46,7 @@ Parser = (function() {
   }
   
   return {
-    fromFile
+    fromFile,
+    fromText
   }
 })()
