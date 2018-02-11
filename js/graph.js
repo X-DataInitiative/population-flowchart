@@ -16,13 +16,12 @@ Graph = (function() {
           'shape': 'rectangle',
           'width': 320,
           'height': '5em',
-          'color': 'white',
-          'background-color': '#555',
-          'text-opacity': 0.5,
+          'color': '#f7f7f7',
+          'background-color': '#363636',
           'text-valign': 'center',
           'text-halign': 'center',
           'text-wrap': 'wrap',
-          'font-weight': 'bold'
+          'font-family': 'sans-serif'
         }
       },
       {
@@ -31,8 +30,8 @@ Graph = (function() {
           'curve-style': 'bezier',
           'width': 4,
           'target-arrow-shape': 'triangle',
-          'line-color': '#bbb',
-          'target-arrow-color': '#bbb'
+          'line-color': '#aaa',
+          'target-arrow-color': '#aaa'
         }
       }
     ]
@@ -44,11 +43,10 @@ Graph = (function() {
     var count_left = el.data('count_left') 
     var count_right = el.data('count_right')
     var diff = count_left - count_right
-    return name.toUpperCase() + '\n' +
+    return name.toUpperCase() + '\n' + '\n' +
       (count_left ? fmt(count_left) : '') + (count_right ? (sep + fmt(count_right)) : '') +
-      (diff > 0 ? ('\n' + 'diff: ' + fmt(diff)) : '')
+      (diff > 0 ? (' (- ' + fmt(diff)) + ')' : '')
   }}
-
 
   function draw($container, elements) {
     cytoscapeOptions.container = $container
