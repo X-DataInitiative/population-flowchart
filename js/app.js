@@ -2,6 +2,7 @@ App = (function() {
 
   var $file = document.getElementById("file");
   var $fileName = document.getElementById('filename')
+  var $graphContainer = document.getElementById('graph')
 
   function handleFileChange() {
     if($file.files.length > 0) {
@@ -11,7 +12,7 @@ App = (function() {
         if (Graph.isDrawn) {
           Graph.destroy()
         }
-        Graph.draw(parsedData) 
+        Graph.draw($graphContainer, parsedData) 
       })
     }
   }

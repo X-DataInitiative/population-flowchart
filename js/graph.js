@@ -53,7 +53,8 @@ Graph = (function() {
   }}
 
 
-  function draw(data) {
+  function draw($el,data) {
+    cytoscapeOptions.container = $el
     cytoscapeOptions.elements = data
     window.cy = cytoscape(cytoscapeOptions)
     Graph.isDrawn = true;
