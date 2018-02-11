@@ -1,4 +1,4 @@
-Chart = (function() {
+Graph = (function() {
 
   var isDrawn = false;
 
@@ -56,7 +56,7 @@ Chart = (function() {
   function draw(data) {
     cytoscapeOptions.elements = data
     window.cy = cytoscape(cytoscapeOptions)
-    Chart.isDrawn = true;
+    Graph.isDrawn = true;
   }
 
   function destroy() {

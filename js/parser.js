@@ -1,6 +1,6 @@
 Parser = (function() {
 
-  function parse(file, callback) {
+  function fromFile(file, callback) {
     reader = new FileReader()
     reader.onload = function(e) {
       var parsedData = processData(JSON.parse(e.target.result))
@@ -42,6 +42,6 @@ Parser = (function() {
   }
   
   return {
-    parse
+    fromFile
   }
 })()

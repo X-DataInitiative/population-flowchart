@@ -7,18 +7,21 @@ App = (function() {
     if($file.files.length > 0) {
       firstFile = $file.files[0]
       $fileName.innerHTML = firstFile.name;
-      Parser.parse(firstFile, function (parsedData) {
-        if (Chart.isDrawn) {
-          console.log('destroying')
-          Chart.destroy()
+      Parser.fromFile(firstFile, function (parsedData) {
+        if (Graph.isDrawn) {
+          Graph.destroy()
         }
-        Chart.draw(parsedData) 
+        Graph.draw(parsedData) 
       })
     }
   }
 
-  function start() {
+  function bindEvents() {
     $file.onchange = handleFileChange
+  }
+
+  function start() {
+    bindEvents()
   }
 
   return { 
