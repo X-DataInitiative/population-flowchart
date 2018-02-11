@@ -3,8 +3,9 @@ html {
 }
 
 #graph {
-  height: 80vh;
   display: block;
+  height: 80vh;
+  padding: 0px;
 }
 
 .upload {
