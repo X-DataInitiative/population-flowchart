@@ -14,12 +14,12 @@ Graph = (function() {
       {
         selector: 'node',
         style: {
-          'content': nodeLabel,
+          'content': getNodeLabel,
           'shape': 'rectangle',
-          'width': nodeWidth,
+          'width': getNodeWidth,
           'height': '5em',
           'color': '#f7f7f7',
-          'background-color': nodeColor,
+          'background-color': getNodeColor,
           'text-valign': 'center',
           'text-halign': 'center',
           'text-wrap': 'wrap',
@@ -29,7 +29,7 @@ Graph = (function() {
       {
         selector: 'edge',
         style: {
-          'label': edgeLabel,
+          'label': getEdgeLabel,
           'curve-style': 'bezier',
           'text-margin-y': '-20px',
           'color': '#888',
@@ -39,13 +39,13 @@ Graph = (function() {
           'target-arrow-shape': 'triangle',
           'line-color': '#aaa',
           'target-arrow-color': '#aaa',
-          'line-style': edgeLineStyle
+          'line-style': getEdgeLineStyle
         }
       }
     ]
   }
 
-  function nodeLabel(node) { 
+  function getNodeLabel(node) { 
     var name = node.data('name') === 'union' ? '' : node.data('id').split('_').join(' ')
     var count = node.data('count')
     var formattedCount = count ? Util.nFormatter(2)(count) : ''
@@ -53,19 +53,19 @@ Graph = (function() {
     return name.toUpperCase() + '\n\n' + formattedCount
   }
 
-  function nodeWidth(node) {
+  function getNodeWidth(node) {
     return node.data('name') === 'union' ? '5em' : '320px'
   }
 
-  function nodeColor(node) {
+  function getNodeColor(node) {
     return node.data('name') === 'union' ? '#565656' : '#363636'
   }
 
-  function edgeLineStyle(edge) {
+  function getEdgeLineStyle(edge) {
     return edge.target().data('name') === 'union' ? 'dashed' : 'solid'
   }
 
-  function edgeLabel(edge) {
+  function getEdgeLabel(edge) {
     if (edge.target().data('name') !== 'union') {
       var targetCount = edge.target().data('count')
       var sourceCount = edge.source().data('count') || 2*targetCount
