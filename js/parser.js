@@ -15,30 +15,58 @@ Parser = (function() {
 
   function processData(rawData) {
     var operations = rawData.operations
+    var unionNodes = 0
     var sourcesNode = { data: {
       id: 'source',
     }}
-    var nodes = operations.map(function(op){
-      return { 
-        data: {
-          id: op.name,
-          count_left: op.patients_before,
-          count_right: op.patients_after
-        }
-      }
-    }).concat([sourcesNode])
 
+    var nodes = [sourcesNode]
     var edges = []
     for (var i = 0; i < operations.length; i++) {
       var op = operations[i]
-      op.parents.forEach(function(input){
+
+      nodes.push({
+        data: {
+          id: op.name,
+          count: op.patients_after
+        }
+      })
+
+      if (op.parents.length > 1) {
+        nodes.push({
+          data: {
+            id: unionNodes,
+            name: 'union',
+            count: op.patients_before
+          }
+        })
+
+        op.parents.forEach(function(input){
+          edges.push({
+            data: {
+              source: input,
+              target: unionNodes
+            }
+          })
+        })
+
         edges.push({
           data: {
-            source: input,
+            source: unionNodes,
             target: op.name
           }
         })
-      })
+        ++unionNodes
+
+      } else if (op.parents.length === 1){
+        var parent = op.parents
+        edges.push({
+          data: {
+            source: op.parents[0],
+            target: op.name
+          }
+        })
+      }
     }
 
     return {
