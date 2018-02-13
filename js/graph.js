@@ -46,10 +46,15 @@ Graph = (function() {
   }
 
   function getNodeLabel(node) { 
-    var name = node.data('name') === 'union' ? '' : node.data('id').split('_').join(' ')
-    var count = node.data('count')
-    var formattedCount = count ? Util.nFormatter(2)(count) : ''
+    var name = formattedCount = ''
+    var count = node.data('count')  
     
+    if (node.data('name') === 'union') {
+      formattedCount = count ? Util.nFormatter(2)(count) : ''
+    } else {
+      name = node.data('id').split('_').join(' ')
+      formattedCount = count ? Util.nFormatter(2)(count) + ' (patients)' : ''
+    }
     return name.toUpperCase() + '\n\n' + formattedCount
   }
 

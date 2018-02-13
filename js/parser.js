@@ -18,6 +18,7 @@ Parser = (function() {
     var unionNodes = 0
     var sourcesNode = { data: {
       id: 'source',
+      count: 5053968
     }}
 
     var nodes = [sourcesNode]
